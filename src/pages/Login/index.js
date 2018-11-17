@@ -32,7 +32,7 @@ class Login extends Component {
             <input className="password-input" type="password" name="password" placeholder="请输入密码" />
           </div>
         </div>
-        <div className="login-btn" onClick={this.test}>登录</div>
+        <div className="login-btn" onClick={this.test}>登录test</div>
         <Button>antd-mobile</Button>
       </div>
     )

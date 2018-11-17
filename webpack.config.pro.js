@@ -4,14 +4,19 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const HappyPack = require('happypack');
+const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+
 const dirname = path.resolve(__dirname)
 
 module.exports = {
     entry: {
-        index: [ "./src/index.js" ]
+        index: [ "./src/index.js" ],
+        vendor: [ "react" ]
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -35,10 +40,7 @@ module.exports = {
                 exclude: /node_modules/,
                 include: path.resolve(__dirname, 'src'),
                 use: {
-                    loader: "babel-loader",
-                    options: {
-                      presets: ['@babel/preset-react']
-                    }
+                    loader: 'happypack/loader?id=babel'
                 }
             },
             {
@@ -88,7 +90,7 @@ module.exports = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        // new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin('style/[name].min.css'),
         new HtmlWebpackPlugin({
             hash: true,
@@ -103,6 +105,25 @@ module.exports = {
           }
         }),
         new BundleAnalyzerPlugin(),
-        new UglifyJSPlugin()
+        new UglifyJSPlugin(),
+        new HappyPack({ // 基础参数设置
+            id: 'babel', // 上面loader?后面指定的id
+            loaders: [{
+                loader: 'babel-loader',
+                options: { babelrc: true, cacheDirectory: true },
+                presets: ['@babel/preset-react']
+            }], // 实际匹配处理的loader
+            threadPool: happyThreadPool,
+            // cache: true // 已被弃用
+            verbose: true
+        }),
+        new webpack.DllReferencePlugin({
+            manifest: require('./dist/react.manifest.json')
+        }),
+        new HtmlIncludeAssetsPlugin({
+            assets: ['./react.dll.js'], // 添加的资源相对html的路径
+            append: false // false 在其他资源的之前添加 true 在其他资源之后添加
+        })
+    
     ]
 };
