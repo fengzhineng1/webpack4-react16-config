@@ -10,14 +10,35 @@ const HappyPack = require('happypack');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
-
 const dirname = path.resolve(__dirname)
 
 module.exports = {
     entry: {
-        index: [ "./src/index.js" ],
-        vendor: [ "react" ]
+        index: [ "./src/index.js" ]
     },
+    optimization: {
+        splitChunks: {
+          chunks: 'async',
+          minSize: 30000,
+          maxSize: 0,
+          minChunks: 1,
+          maxAsyncRequests: 5,
+          maxInitialRequests: 3,
+          automaticNameDelimiter: '~',
+          name: true,
+          cacheGroups: {
+            vendors: {
+              test: /react|react-dom|react-router|react-router-dom/,
+              priority: -10
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true
+            }
+          }
+        }
+      },
     output: {
         path: path.resolve(__dirname, 'dist'),
         // 给js css 图片等在html引入中添加前缀
