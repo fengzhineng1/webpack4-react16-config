@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
-import { Button } from 'antd-mobile'
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Button, Toast } from 'antd-mobile'
+import { Link } from "react-router-dom";
+import Loadable from 'react-loadable';
 // import fetch from 'apis/fetch'
 import LoginLogo from '../../assets/imgs/logo.png'
-import './index.css'
+import './index.less'
+
+
 
 class Login extends Component {
+  
+  state = {
+    
+  }
+
   componentDidMount() {
     // fetch('xxx.xxx', {}).then(res => {
 
@@ -14,7 +22,6 @@ class Login extends Component {
   }
 
   test = () => {
-    
   }
 
   render() {

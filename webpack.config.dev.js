@@ -72,7 +72,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.js', '.jsx', '.json'],
+        extensions: ['.js', '.jsx', '.json', '.jsx'],
         alias: {
           'components': dirname + '/src/components',
           'assets': dirname + '/src/assets',
@@ -84,7 +84,10 @@ module.exports = {
     },
 
     plugins: [
-        new ExtractTextPlugin('style/[name].min.css'),
+        new ExtractTextPlugin({
+            filename: 'style/[name].min.css',
+            allChunks: true
+        }),
         new HtmlWebpackPlugin({
             hash: true,
             chunks: ['index'],

@@ -38,7 +38,7 @@ module.exports = {
             }
           }
         }
-      },
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         // 给js css 图片等在html引入中添加前缀
@@ -112,7 +112,10 @@ module.exports = {
     },
     plugins: [
         // new CleanWebpackPlugin(['dist']),
-        new ExtractTextPlugin('style/[name].min.css'),
+        new ExtractTextPlugin({
+            filename: 'style/[name].min.css',
+            allChunks: true
+        }),
         new HtmlWebpackPlugin({
             hash: true,
             chunks: ['index'],
@@ -145,6 +148,5 @@ module.exports = {
             assets: ['./react.dll.js'], // 添加的资源相对html的路径
             append: false // false 在其他资源的之前添加 true 在其他资源之后添加
         })
-    
     ]
 };
