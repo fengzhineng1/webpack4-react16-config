@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.pro.js --mode production --env.NODE_ENV=production",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev --mode development"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev --mode development",
+    "test": "standard && node **/*.js"
   },
   "author": "zhineng",
   "license": "MIT",
@@ -50,6 +51,7 @@
     "prop-types": "^15.6.2",
     "react-hot-loader": "^4.3.12",
     "source-map-loader": "^0.2.4",
+    "standard": "^12.0.1",
     "style-loader": "^0.20.3",
     "typescript": "^3.1.6",
     "uglifyjs-webpack-plugin": "^2.0.1",
