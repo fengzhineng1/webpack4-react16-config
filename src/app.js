@@ -9,6 +9,7 @@ const loadableFunc = (loader) => Loadable({
   loader,
   loading: Loading
 })
+g
 
 const Home = loadableFunc(() => import('./pages/Home'))
 const BigFile = loadableFunc(() => import('./pages/BigFile'))
@@ -37,7 +38,7 @@ const Routers = () =>
     <Switch>
       <Route path="/" exact component={Login} />
       <Route path="/home" component={Home} />
-      <Route path="/login"  component={Login} /> 
+      <Route path="/login" component={Login} />
       <Route path="/bigFile" component={BigFile} />
       <Route path="/numberInput" component={Inputs} />
       <Route component={NoMatch} />
