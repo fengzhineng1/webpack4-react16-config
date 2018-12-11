@@ -130,6 +130,7 @@ module.exports = {
         }),
         new BundleAnalyzerPlugin(),
         new UglifyJSPlugin(),
+
         new HappyPack({ // 基础参数设置
             id: 'babel', // 上面loader?后面指定的id
             loaders: [{
