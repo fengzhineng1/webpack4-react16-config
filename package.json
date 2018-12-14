@@ -62,5 +62,13 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.2"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not ie <= 8",
+    "last 5 versions",
+    "> 1%",
+    "iOS 7",
+    "last 3 iOS versions"
+  ]
 }
