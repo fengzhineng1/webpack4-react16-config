@@ -11,7 +11,7 @@ module.exports = {
     index: [
       "webpack/hot/dev-server",
       "webpack-dev-server/client?http://localhost:" + port,
-      "./src/index.js"
+      "./src/index.tsx"
     ]
   },
 
@@ -35,6 +35,8 @@ module.exports = {
           }
         ]
       },
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -70,7 +72,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".js", ".jsx", ".json", ".jsx"],
+    extensions: [".js", ".jsx", ".json", ".jsx", ".tsx", ".ts"],
     alias: {
       components: dirname + "/src/components",
       assets: dirname + "/src/assets",
@@ -80,6 +82,10 @@ module.exports = {
       apis: dirname + "/src/apis"
     }
   },
+  // externals: {
+  //   "react": "React",
+  //   "react-dom": "ReactDOM"
+  // },
 
   plugins: [
     new ExtractTextPlugin({

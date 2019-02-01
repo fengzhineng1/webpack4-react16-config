@@ -9,12 +9,12 @@ const loadableFunc = (loader) => Loadable({
   loader,
   loading: Loading
 })
-g
 
 const Home = loadableFunc(() => import('./pages/Home'))
 const BigFile = loadableFunc(() => import('./pages/BigFile'))
 const Login = loadableFunc(() => import('./pages/Login'))
 const NoMatch = loadableFunc(() => import('./pages/NoMatch'))
+const Hello = loadableFunc(() => import('./pages/Hello'))
 const Inputs = Loadable({
   loader: () => import('./pages/Input'),
   loading: Loading
@@ -36,7 +36,7 @@ function Loading({ error }) {
 const Routers = () =>
   <Router>
     <Switch>
-      <Route path="/" exact component={Login} />
+      <Route path="/" exact component={Hello} />
       <Route path="/home" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/bigFile" component={BigFile} />
