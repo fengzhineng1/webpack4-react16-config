@@ -1,5 +1,6 @@
 
 import React from 'react'
+interface HelloProps { compiler: string; framework: string; }
 
 const NoMatch = () => (
   <div>

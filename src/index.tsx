@@ -4,7 +4,7 @@
 
 // import ReactDOM from 'react-dom';
 // import './style/common.css'
-// import App from './app.js'
+import App from './app'
 
 // ReactDOM.render(
 //     <Provider store={Store}>
@@ -19,6 +19,11 @@ import * as ReactDOM from "react-dom";
 import { Hello } from "./pages/Hello";
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
+    <App />,
     document.getElementById("app")
 );
+
+// ReactDOM.render(
+//     <Hello compiler="TypeScript" framework="React" />,
+//     document.getElementById("app")
+// );
